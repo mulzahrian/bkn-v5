@@ -41,6 +41,15 @@
             <!-- Bootstrap core JavaScript-->
             <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
             <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
+
+            <script>
+                $(document).ready(function() {
+                    $('#datatable1').DataTable();
+                });
+            </script>
 
             <!-- Core plugin JavaScript-->
             <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
