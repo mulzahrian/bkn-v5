@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">Informasi Data</h1>
 
 
 
@@ -15,11 +15,12 @@
             <?php endif; ?>
 
             <?= $this->session->flashdata('message'); ?>
-            <a href="<?= base_url(); ?>menu/excel" class="btn btn-success"><i class="fa fa-clipboard"></i>  Excel File</a>
-            <a href="<?= base_url(); ?>menu/pdf" class="btn btn-danger"><i class="fa fa-clipboard"></i>  PDF File</a>
+            <a href="<?= base_url(); ?>menu/excel" class="btn btn-success"><i class="fa fa-clipboard"></i> Excel File</a>
+            <a href="<?= base_url(); ?>menu/pdf" class="btn btn-danger"><i class="fa fa-clipboard"></i> PDF File</a>
 
             <!-- <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">Add New Layanan</a> -->
 
+<<<<<<< HEAD
             <div class="row mt-3">
         <div class="col-md-3">
             <form action="<?= base_url('menu/data'); ?>" method="post">
@@ -60,13 +61,42 @@
                                 <a href="<?= base_url(); ?>menu/hapus/<?= $sm['id']; ?>" class="btn btn-danger btn-sm float-center tombol-hapus"><i class="fas fa-trash-alt"></i></a>
                                 <a href="<?= base_url(); ?>menu/detail_data/<?= $sm['id']; ?>" class="btn btn-success btn-sm float-center"><i class="fas fa-key"></i></a>
                             </td>
+=======
+            <div class="card-body">
+                <table id="datatable1" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">NIP</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Instansi</th>
+                            <th scope="col">Layanan</th>
+                            <th scope="col">Action</th>
+>>>>>>> da5d9d5bb7e027060d291cd3c50fd9556e6e7e96
                         </tr>
-                        <?php $i++; ?>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        <?php foreach ($data as $sm) : ?>
+                            <tr>
+                                <th scope="row"><?= $i; ?></th>
+                                <td><?= $sm['nip']; ?></td>
+                                <td><?= $sm['nama']; ?></td>
+                                <td><?= $sm['instansi']; ?></td>
+                                <td><?= $sm['layanan']; ?></td>
+                                <td>
+                                    <a href="<?= base_url(); ?>menu/ubah/<?= $sm['id']; ?>" class="btn btn-warning btn-sm float-center"><i class=" fas fa-pen"></i></a>
+                                    <a href="<?= base_url(); ?>menu/hapus/<?= $sm['id']; ?>" class="btn btn-danger btn-sm float-center tombol-hapus"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="<?= base_url(); ?>menu/detail_data/<?= $sm['id']; ?>" class="btn btn-success btn-sm float-center"><i class="fas fa-key"></i></a>
+                                </td>
+                            </tr>
+                            <?php $i++; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
 
 
+            </div>
         </div>
     </div>
 

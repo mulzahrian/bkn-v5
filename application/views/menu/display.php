@@ -24,6 +24,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Quotes</th>
                         <th scope="col">Video</th>
+                        <th scope="col">Action</th>
 
                     </tr>
                 </thead>
@@ -35,7 +36,7 @@
                             <td><?= $sm['quotes']; ?></td>
                             <td><?= $sm['video']; ?></td>
                             <td>
-                            <a href="<?= base_url(); ?>menu/ubah_display/<?= $sm['id']; ?>" class="btn btn-warning btn-sm float-center"><i class=" fas fa-pen"></i></a>
+                                <a href="<?= base_url(); ?>menu/ubah_display/<?= $sm['id']; ?>" class="btn btn-warning btn-sm float-center"><i class=" fas fa-pen"></i></a>
                             </td>
                         </tr>
                         <?php $i++; ?>
