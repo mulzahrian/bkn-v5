@@ -41,6 +41,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Instansi</th>
                         <th scope="col">Layanan</th>
+                        <th scope="col">Waktu</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -53,6 +54,7 @@
                             <td><?= $sm['nama']; ?></td>
                             <td><?= $sm['instansi']; ?></td>
                             <td><?= $sm['layanan']; ?></td>
+                            <td><?= $sm['created_at']; ?></td>
                             <td>
                                 <a href="<?= base_url(); ?>menu/ubah/<?= $sm['id']; ?>" class="btn btn-warning btn-sm float-center"><i class=" fas fa-pen"></i></a>
                                 <a href="<?= base_url(); ?>menu/hapus/<?= $sm['id']; ?>" class="btn btn-danger btn-sm float-center tombol-hapus"><i class="fas fa-trash-alt"></i></a>

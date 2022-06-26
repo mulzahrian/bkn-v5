@@ -117,5 +117,11 @@ class Menu_model extends CI_Model
         $this->db->delete('layanan', ['id' => $id]);
     }
 
+    public function get_all_layanan()
+    {
+        $sql = "SELECT * FROM layanan order by created_at desc";
+        return $this->db->query($sql);
+    }
+
     
 }

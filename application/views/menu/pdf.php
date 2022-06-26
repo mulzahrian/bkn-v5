@@ -37,6 +37,9 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Instansi</th>
                         <th scope="col">Layanan</th>
+                        <th scope="col">Satker</th>
+                        <th scope="col">Kepentingan</th>
+                        <th scope="col">Counter</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +51,9 @@
                             <td><?= $sm['nama']; ?></td>
                             <td><?= $sm['instansi']; ?></td>
                             <td><?= $sm['layanan']; ?></td>
+                            <td><?= $sm['satker']; ?></td>
+                            <td><?= $sm['kepentingan']; ?></td>
+                            <td><?= $sm['counter']; ?></td>
                         </tr>
                         <?php $i++; ?>
                     <?php endforeach; ?>

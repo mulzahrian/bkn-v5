@@ -1,3 +1,23 @@
+<div class="col-xl-12 col-md-3 mb-2">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        TIMES</div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <!-- <i class="fas fa-calendar-alt fa-2x text-gray-800" id="current_date"></i> -->
+                                    <i class="fas fa-calendar-alt fa-2x text-gray-800" id="time"> </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+                <!-- End of Topbar --> 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
@@ -54,12 +74,12 @@
                             <div class="chart-area">
                                 <h1 class="h3 mb-4 text-white-800" style="text-align:center">Antrean</h1>
                                 <?php foreach ($counter as $sm) : ?>
-                                    <h1 class="h1 mb-4 text-white-800" style="text-align:center"><?= $sm['nama']; ?></h1>
+                                    <h1 class="h1 mb-4 text-white-800 bg-info"  style="text-align:center"><?= $sm['nama']; ?></h1>
                                     <!-- layana -->
                                 <?php endforeach; ?>
                                     <h1 class="h3 mb-4 text-white-800" style="text-align:center">Layanan</h1>
                                     <?php foreach ($counter as $ly) : ?>
-                                    <h1 class="h1 mb-4 text-white-800" style="text-align:center"><?= $ly['layanan']; ?></h1>
+                                    <h1 class="h1 mb-4 text-white-800 bg-info" style="text-align:center"><?= $ly['layanan']; ?></h1>
                                     <?php endforeach; ?>
                                 
                             </div>
@@ -102,3 +122,17 @@
                     </div>
                 </div>
             </div>
+
+<script>
+date = new Date();
+year = date.getFullYear();
+month = date.getMonth() + 1;
+day = date.getDate();
+document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+</script>
+
+<script>
+var datetime = new Date();
+console.log(datetime);
+document.getElementById("time").textContent = datetime; //it will print on html page
+</script>

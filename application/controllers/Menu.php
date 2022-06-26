@@ -133,7 +133,9 @@ class Menu extends CI_Controller
         $this->load->model('Menu_model', 'data');
 
         //$data['subMenu'] = $this->menu->getSubMenu();
-        $data['data'] = $this->db->get('layanan')->result_array();
+        //get_all_layanan
+        $data['data'] = $this->Menu_model->get_all_layanan()->result_array();
+        //$data['data'] = $this->db->get('layanan')->result_array();
         if( $this->input->post('keyword') ) {
             $data['data'] = $this->Menu_model->cariData();
         }
@@ -255,8 +257,8 @@ class Menu extends CI_Controller
         
         $this->load->view('menu/pdf', $data);
 
-        $paper_size = 'A5';
-        $orientation = 'portrait';
+        $paper_size = 'A4';
+        $orientation = 'landscape';
         $html = $this->output->get_output();
 
         $this->dompdf->set_paper($paper_size, $orientation);
@@ -384,7 +386,7 @@ class Menu extends CI_Controller
 
         $this->load->view('templates/header', $data);
         //$this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        //$this->load->view('templates/topbar', $data);
         $this->load->view('menu/counter-A', $data);
         $this->load->view('templates/footer');
     }
