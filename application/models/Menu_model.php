@@ -122,6 +122,4 @@ class Menu_model extends CI_Model
         $sql = "SELECT * FROM layanan order by created_at desc";
         return $this->db->query($sql);
     }
-
-    
 }

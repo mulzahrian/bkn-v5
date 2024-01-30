@@ -9,7 +9,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <!-- <i class="fas fa-calendar-alt fa-2x text-gray-800" id="current_date"></i> -->
-                                    <i class="fas fa-calendar-alt fa-2x text-gray-800" id="time"> </i>
+                                    <i class="fas fa-calendar-alt fa-2x text-gray-800" id="hasil"> </i>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <div class="chart-area">
+                            <div class="chart-area" id="bisa>
                                 <h1 class="h3 mb-4 text-white-800" style="text-align:center">Antrean</h1>
                                 <?php foreach ($counter as $sm) : ?>
                                     <h1 class="h1 mb-4 text-white-800 bg-info"  style="text-align:center"><?= $sm['nama']; ?></h1>
@@ -135,4 +135,30 @@ document.getElementById("current_date").innerHTML = month + "/" + day + "/" + ye
 var datetime = new Date();
 console.log(datetime);
 document.getElementById("time").textContent = datetime; //it will print on html page
+</script>
+
+<script>
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+document.getElementById("hasil").textContent = datetime;
+</script>
+
+<script>
+$(document).on("submit", ".postAjax", function(e){
+    e.preventDefault();
+    $(this).LoadingOverlay("show");
+    data = $(this).serializeObject();
+    var element = $(this);
+
+    $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        success:function(newCommentData){
+            /* do some process here to transform your newCommentData array into html code */
+            $(element).next(".chart-area").append(newCommentData);
+        }
+    });
+});
 </script>

@@ -204,6 +204,52 @@ class Menu extends CI_Controller
 
         $object = new PHPExcel();
 
+       // create style
+    $default_border = array(
+        'style' => PHPExcel_Style_Border::BORDER_THIN,
+        'color' => array('rgb'=>'000000')
+    );
+    $style_header = array(
+        'borders' => array(
+            'bottom' => $default_border,
+            'left' => $default_border,
+            'top' => $default_border,
+            'right' => $default_border,
+            'center' => $default_border,
+            'justify' => $default_border,
+            'centerContinuous' => $default_border,
+            'general' => $default_border,
+
+        ),
+        'fill' => array(
+            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'color' => array('rgb'=>'E1E0F7'),
+        ),
+        'font' => array(
+            'bold' => false,
+    'size' => 14,
+        )
+    );
+    $style_content = array(
+        'borders' => array(
+            'bottom' => $default_border,
+            'left' => $default_border,
+            'top' => $default_border,
+            'right' => $default_border,
+            'center' => $default_border,
+            'justify' => $default_border,
+            'centerContinuous' => $default_border,
+            'general' => $default_border,
+        ),
+        'fill' => array(
+            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'color' => array('rgb'=>'eeeeee'),
+        ),
+        'font' => array(
+    'size' => 12,
+        )
+    );
+
         $object->getProperties()->setCreator("Zahra");
         $object->getProperties()->setLastModifiedBy("Zahra");
         $object->getProperties()->setTitle("Daftar Data Layanan");
@@ -220,10 +266,12 @@ class Menu extends CI_Controller
         $object->getActiveSheet()->setCellValue('H1','No Hp');
         $object->getActiveSheet()->setCellValue('I1','Layanan');
         $object->getActiveSheet()->setCellValue('J1','Counter');
+        $object->getActiveSheet()->getStyle('A1:J1')->applyFromArray( $style_header ); // give style to header
 
         $baris = 2;
         $no = 1;
-
+        $firststyle='A2';
+        $laststyle = 'J2';
         foreach ($data['data'] as $mds) {
             $object->getActiveSheet()->setCellValue('A'.$baris, $no++);
             $object->getActiveSheet()->setCellValue('B'.$baris, $mds->nip);
@@ -236,7 +284,11 @@ class Menu extends CI_Controller
             $object->getActiveSheet()->setCellValue('I'.$baris, $mds->layanan);
             $object->getActiveSheet()->setCellValue('J'.$baris, $mds->counter);
             $baris++;
+            $laststyle='J'.$baris;
+            
         }
+        
+        $object->getActiveSheet()->getStyle($firststyle.':'.$laststyle)->applyFromArray( $style_content ); // give style to header
     $filename="Data".'.xlsx';
     $object->getActiveSheet()->setTitle("Data");
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -315,42 +367,35 @@ class Menu extends CI_Controller
             $this->load->view('menu/display_ubah', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Menu_model->ubahDataDisplay($id);
-            $this->session->set_flashdata('flash', 'Diubah');
-            //
-            // $name = $this->input->post('name');
-            // $email = $this->input->post('email');
+            $quotes = $this->input->post('quotes');
 
-            // // cek jika ada gambar yang akan diupload
-            // $upload_image = $_FILES['image']['name'];
+            // cek jika ada gambar yang akan diupload
+            $upload_image = $_FILES['video']['name'];
 
-            // if ($upload_image) {
-            //     $config['allowed_types'] = 'gif|jpg|png';
-            //     $config['max_size']      = '2048';
-            //     $config['upload_path'] = './assets/img/profile/';
+            if ($upload_image) {
+                $config['allowed_types'] = 'mp4';
+                $config['max_size']      = '100000';
+                $config['upload_path'] = './assets/img/profile/';
 
-            //     $this->load->library('upload', $config);
+                $this->load->library('upload', $config);
 
-            //     if ($this->upload->do_upload('image')) {
-            //         $old_image = $data['user']['image'];
-            //         if ($old_image != 'default.jpg') {
-            //             unlink(FCPATH . 'assets/img/profile/' . $old_image);
-            //         }
-            //         $new_image = $this->upload->data('file_name');
-            //         $this->db->set('image', $new_image);
-            //     } else {
-            //         echo $this->upload->dispay_errors();
-            //     }
-            // }
+                if ($this->upload->do_upload('video')) {
+                    $old_image = $data['display']['video'];
+                    if ($old_image != 'video.mp4') {
+                        unlink(FCPATH . 'assets/img/profile/' . $old_image);
+                    }
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('video', $new_image);
+                } else {
+                    echo $this->upload->dispay_errors();
+                }
+            }
 
-            // $this->db->set('name', $name);
+            $this->db->set('quotes', $quotes);
             // $this->db->where('email', $email);
-            // $this->db->update('user');
+            $this->db->update('display');
 
-            // $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated!</div>');
-            // redirect('user');
-
-            //
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Video Has Updated!</div>');
             redirect('menu/display');
         }
     }
